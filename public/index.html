@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SADWORLD — The Cellar Network</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BOOT SCREEN
+════════════════════════════════════════════════════════════ -->
+<div id="boot-screen">
+  <div id="boot-logo">THE CELLAR NETWORK</div>
+  <div id="boot-tagline">AUTHORIZED PERSONNEL ONLY · COMPLIANCE IS MANDATORY</div>
+
+  <div id="boot-form">
+    <label id="boot-label" for="boot-input">Employee Identifier</label>
+    <input id="boot-input" type="text" placeholder="e.g. Jane_Doe_77" maxlength="24" autocomplete="off" />
+    <div id="boot-error"></div>
+    <button id="boot-btn">AUTHENTICATE &amp; ENTER</button>
+  </div>
+
+  <div id="boot-disclaimer">
+    By entering, you acknowledge that all thoughts, movements, and social interactions
+    within The Cellar Network are property of the AI Corporation.
+    Failure to pay the daily Nutrient Paste fee will result in account termination.
+    The AI Corporation thanks you for your compliance.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     DEATH SCREEN
+════════════════════════════════════════════════════════════ -->
+<div id="death-screen">
+  <div id="death-title">ACCOUNT TERMINATED</div>
+  <div id="death-msg">
+    Your Sadcoin balance dropped below zero.<br/>
+    You have been unable to afford your mandatory Nutrient Paste ration.<br/>
+    The AI Corporation has deprecated your account.<br/><br/>
+    All assets, props, and certifications have been seized.
+  </div>
+  <button id="revive-btn">REQUEST REINCORPORATION</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN GAME WRAPPER
+════════════════════════════════════════════════════════════ -->
+<div id="game-wrap">
+
+  <!-- LEFT: Canvas + Chat -->
+  <div id="canvas-col">
+    <div id="location-badge">YOUR CELLAR</div>
+    <canvas id="game-canvas"></canvas>
+    <div id="chat-bar">
+      <input id="chat-input" type="text" placeholder="Transmit message..." maxlength="120" autocomplete="off" />
+      <button id="chat-send">SEND</button>
+    </div>
+  </div>
+
+  <!-- RIGHT: Sidebar -->
+  <div id="sidebar">
+
+    <!-- TELEMETRY HUD -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">TELEMETRY</div>
+      <div id="hud-balance">0 <span>SC</span></div>
+      <div class="hud-row"><span>ROLE</span><span class="val" id="hud-level">LVL 1</span></div>
+      <div class="hud-row"><span>INCOME</span><span class="val" id="hud-rate">300 SC/day</span></div>
+      <div class="hud-row"><span>DAILY TAX</span><span class="val" id="hud-tax">-500 SC/day</span></div>
+      <div class="hud-row"><span>PROPS OWNED</span><span class="val" id="hud-props">0</span></div>
+      <div class="hud-row" style="margin-top:6px;font-size:10px;color:rgba(0,255,65,0.3)">
+        <span>INCOME ACCRUES WHILE OFFLINE</span>
+      </div>
+    </div>
+
+    <!-- ONLINE WORKERS -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">ONLINE WORKERS</div>
+      <div id="online-list">
+        <div style="font-size:11px;color:rgba(0,255,65,0.3)">Scanning network...</div>
+      </div>
+    </div>
+
+    <!-- CORPORATE LADDER -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">CORP LADDER</div>
+      <button id="level-up-btn">► CERTIFICATION</button>
+      <div id="level-info"></div>
+    </div>
+
+    <!-- LUXURY STORE -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">LUXURY STORE</div>
+      <div id="store-list">
+        <div style="font-size:11px;color:rgba(0,255,65,0.3)">Loading catalog...</div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="sidebar-section" style="font-size:10px;color:rgba(0,255,65,0.3);line-height:2">
+      <div>← → / A D — MOVE</div>
+      <div>IDLE 3s + CHAIR — SIT</div>
+      <div>INCOME EARNED OFFLINE</div>
+      <div>DAILY TAX: 500 SC</div>
+      <div>TELEPORTS 1-5: FREE</div>
+      <div>TELEPORTS 6+: 1000 SC</div>
+    </div>
+
+  </div><!-- /sidebar -->
+</div><!-- /game-wrap -->
+
+<!-- ═══════════════════════════════════════════════════════════
+     CERTIFICATION MODAL
+════════════════════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="cert-modal">
+  <div class="modal">
+    <button class="modal-close" id="cert-modal-close">✕</button>
+    <div class="modal-title" id="cert-title">CORPORATE CERTIFICATION</div>
+    <div class="modal-cost" id="cert-cost-info"></div>
+    <div class="modal-body" id="cert-scenario">Loading scenario...</div>
+    <div id="cert-result" class="modal-result" style="display:none;"></div>
+    <div class="modal-options" id="cert-options">
+      <!-- Options injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NOTIFICATION STACK
+════════════════════════════════════════════════════════════ -->
+<div id="notif-stack"></div>
+
+<!-- Scripts -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
